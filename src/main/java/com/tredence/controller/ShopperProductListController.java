@@ -5,10 +5,8 @@ import com.tredence.service.ShopperProductListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -30,5 +28,13 @@ public class ShopperProductListController {
         shopperProductListService.addShopperProductLists(shopperProductLists);
         return ResponseEntity.status(HttpStatus.CREATED).body("Shopper Product Lists added successfully");
     }
+
+   //GET http://localhost:8080/api/shopper-product-list/get
+    @GetMapping("/get")
+    public ResponseEntity<List<ShopperPersonalizedProductList>> getShopperProductLists() {
+        List<ShopperPersonalizedProductList> shopperProductLists = shopperProductListService.getAllShopperProductLists();
+        return ResponseEntity.ok().body(shopperProductLists);
+    }
+
 }
 

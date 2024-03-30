@@ -17,7 +17,8 @@ public class ShopperProductListServiceImpl implements ShopperProductListService 
 
     private static final Logger logger = LoggerFactory.getLogger(ShopperProductListServiceImpl.class);
 
-    private  ShopperPersonalizedProductListRepository shopperPersonalizedProductListRepository;
+    private ShopperPersonalizedProductListRepository shopperPersonalizedProductListRepository;
+    private List<ShopperPersonalizedProductList> shopperProductLists;
 
     @Autowired
     public ShopperProductListServiceImpl(ShopperPersonalizedProductListRepository shopperProductListRepository) {
@@ -40,5 +41,15 @@ public class ShopperProductListServiceImpl implements ShopperProductListService 
         shopperPersonalizedProductList.setRelevancyScore(relevancyScore);
         shopperPersonalizedProductListRepository.save(shopperPersonalizedProductList);
     }
+
+    @Override
+    public List<ShopperPersonalizedProductList> getAllShopperProductLists() {
+        try {
+            return this.shopperProductLists;
+        } catch (Exception e) {
+            // Log the exception or perform any other necessary actions
+            throw new RuntimeException("Failed to retrieve shopper product lists: " + e.getMessage());
+        }
     }
+}
 
